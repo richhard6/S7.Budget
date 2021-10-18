@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 function Panel({ setTotalPrice }) {
   const [adds, setAdds] = useState({ pages: 0, languages: 0 })
@@ -29,7 +29,12 @@ function Panel({ setTotalPrice }) {
     }
   }
 
-  setTotalPrice((prevPrice) => (prevPrice *= adds.pages * adds.languages * 30))
+  useEffect(() => {
+    setTotalPrice(
+      (prevPrice) => (prevPrice = prevPrice + adds.pages * adds.languages * 30)
+    )
+  }, [adds, setTotalPrice])
+
   console.log(500 + adds.pages * adds.languages * 30)
   return (
     <div>
