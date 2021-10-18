@@ -1,5 +1,5 @@
-import logo from './logo.svg'
 import './App.css'
+import Panel from './components/panel/Panel'
 import { useState, useEffect } from 'react'
 
 function App() {
@@ -24,6 +24,7 @@ function App() {
       <input type="checkbox" name="ads" onChange={(e) => addToTotal(200, e)} />
 
       <h2>Total:{totalPrice} </h2>
+      <Panel setTotalPrice={setTotalPrice} />
     </div>
   )
 }
