@@ -1,8 +1,17 @@
 import { useState, useEffect } from 'react'
 
-function Panel({ setTotalPrice }) {
+function Panel({ setTotalPrice, isClicked }) {
   const [adds, setAdds] = useState({ pages: 0, languages: 0 })
-  console.log(adds)
+
+  useEffect(() => {
+    setTotalPrice(
+      (prevPrice) => (prevPrice = prevPrice + adds.pages * adds.languages * 30)
+    )
+  }, [adds, setTotalPrice])
+
+  useEffect(() => {
+    setAdds({ pages: 0, languages: 0 })
+  }, [isClicked])
 
   const getAdds = (type, e) => {
     switch (type) {
@@ -29,13 +38,6 @@ function Panel({ setTotalPrice }) {
     }
   }
 
-  useEffect(() => {
-    setTotalPrice(
-      (prevPrice) => (prevPrice = prevPrice + adds.pages * adds.languages * 30)
-    )
-  }, [adds, setTotalPrice])
-
-  console.log(500 + adds.pages * adds.languages * 30)
   return (
     <div>
       <label htmlFor="pages">Pages quantity</label>
