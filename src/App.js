@@ -1,6 +1,6 @@
 import './App.css'
 import Panel from './components/panel/Panel'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 function App() {
   const [totalPrice, setTotalPrice] = useState(0)

@@ -1,3 +1,5 @@
+import { Wrapper, Button, Input, WrapperButton } from './styles'
+
 function Extra({ adds, setAdds, setTotalPrice, setLastAdd, lastAdd, getAdds }) {
   //getAdds
   const handleClick = (type, style, e) => {
@@ -52,25 +54,26 @@ function Extra({ adds, setAdds, setTotalPrice, setLastAdd, lastAdd, getAdds }) {
   // onChange={(e) => handleClick('add', 'languages', e)}
 
   return (
-    <div>
-      <input
+    <Wrapper>
+      <Input
         value={adds.pages}
         onChange={(e) => getAdds('pages', e)}
         type="number"
       />
-
-      <button onClick={() => handleClick('substract', 'pages')}>-</button>
-      <button onClick={() => handleClick('add', 'pages')}>+</button>
-
-      <input
+      <WrapperButton>
+        <Button onClick={() => handleClick('substract', 'pages')}>-</Button>
+        <Button onClick={() => handleClick('add', 'pages')}>+</Button>
+      </WrapperButton>
+      <Input
         value={adds.languages}
         onChange={(e) => getAdds('languages', e)}
         type="number"
       />
-
-      <button onClick={() => handleClick('substract', 'languages')}>-</button>
-      <button onClick={() => handleClick('add', 'languages')}>+</button>
-    </div>
+      <WrapperButton>
+        <Button onClick={() => handleClick('substract', 'languages')}>-</Button>
+        <Button onClick={() => handleClick('add', 'languages')}>+</Button>
+      </WrapperButton>
+    </Wrapper>
   )
 }
 
