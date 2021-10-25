@@ -1,29 +1,31 @@
-import { useState } from 'react'
+import { useEffect } from 'react'
 
-function Extra({ getAdds, adds, setAdds }) {
-  const [add, setAdd] = useState({ languages: 0, pages: 0 })
+function Extra({ getAdds, adds, setAdds, setTotalPrice, setLastAdd }) {
+  useEffect(() => {
+    const add = adds.pages * adds.languages * 30
+    setTotalPrice((prevPrice) => (prevPrice = prevPrice + add))
 
-  //si usamos add en vez de adds funciona..... . .pero no aplica el cambio de precio :) :) :) :;) :=)
-
-  console.log(adds)
+    setLastAdd((prev) => (prev = add))
+  }, [adds, setTotalPrice, setLastAdd])
 
   const handleClick = (type, style) => {
     switch (type) {
       case 'add':
         if (style === 'pages') {
-          setAdds((prevAdd) => {
+          setAdds((prevAdds) => {
+            console.log(prevAdds.pages)
             return {
-              ...prevAdd,
-              pages: prevAdd.pages++,
+              ...prevAdds,
+              pages: ++prevAdds.pages,
             }
           })
         }
 
         if (style === 'languages') {
-          setAdds((prevAdd) => {
+          setAdds((prevAdds) => {
             return {
-              ...prevAdd,
-              languages: prevAdd.languages++,
+              ...prevAdds,
+              languages: ++prevAdds.languages,
             }
           })
         }
@@ -32,19 +34,19 @@ function Extra({ getAdds, adds, setAdds }) {
 
       case 'substract':
         if (style === 'pages') {
-          setAdds((prevAdd) => {
+          setAdds((prevAdds) => {
             return {
-              ...prevAdd,
-              pages: prevAdd.pages--,
+              ...prevAdds,
+              pages: --prevAdds.pages,
             }
           })
         }
 
         if (style === 'languages') {
-          setAdds((prevAdd) => {
+          setAdds((prevAdds) => {
             return {
-              ...prevAdd,
-              languages: prevAdd.languages--,
+              ...prevAdds,
+              languages: --prevAdds.languages,
             }
           })
         }
