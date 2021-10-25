@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import Extra from '../extra/Extra'
 
 function Panel({ setTotalPrice, isClicked }) {
   const [adds, setAdds] = useState({ pages: 0, languages: 0 })
@@ -63,6 +64,8 @@ function Panel({ setTotalPrice, isClicked }) {
         placeholder="1"
         onChange={(e) => getAdds('languages', e)}
       />
+
+      <Extra getAdds={getAdds} adds={adds} setAdds={setAdds} />
     </div>
   )
 }
