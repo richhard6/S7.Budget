@@ -1,59 +1,57 @@
 import { useEffect } from 'react'
 
-function Extra({ getAdds, adds, setAdds, setTotalPrice, setLastAdd }) {
-  useEffect(() => {
-    const add = adds.pages * adds.languages * 30
-    setTotalPrice((prevPrice) => (prevPrice = prevPrice + add))
-
-    setLastAdd((prev) => (prev = add))
-  }, [adds, setTotalPrice, setLastAdd])
-
+function Extra({ getAdds, adds, setAdds, setTotalPrice, setLastAdd, lastAdd }) {
   const handleClick = (type, style) => {
-    switch (type) {
-      case 'add':
-        if (style === 'pages') {
-          setAdds((prevAdds) => {
-            console.log(prevAdds.pages)
-            return {
-              ...prevAdds,
-              pages: ++prevAdds.pages,
-            }
-          })
-        }
+    if (adds.pages || adds.languages) {
+      switch (type) {
+        case 'add':
+          if (style === 'pages') {
+            setAdds((prevAdds) => {
+              console.log(prevAdds.pages)
+              return {
+                ...prevAdds,
+                pages: ++prevAdds.pages, //here's the bug
+              }
+            })
+          }
 
-        if (style === 'languages') {
-          setAdds((prevAdds) => {
-            return {
-              ...prevAdds,
-              languages: ++prevAdds.languages,
-            }
-          })
-        }
+          if (style === 'languages') {
+            setAdds((prevAdds) => {
+              return {
+                ...prevAdds,
+                languages: ++prevAdds.languages,
+              }
+            })
+          }
 
-        break
+          break
 
-      case 'substract':
-        if (style === 'pages') {
-          setAdds((prevAdds) => {
-            return {
-              ...prevAdds,
-              pages: --prevAdds.pages,
-            }
-          })
-        }
+        case 'substract':
+          if (style === 'pages') {
+            setAdds((prevAdds) => {
+              return {
+                ...prevAdds,
+                pages: --prevAdds.pages,
+              }
+            })
+          }
 
-        if (style === 'languages') {
-          setAdds((prevAdds) => {
-            return {
-              ...prevAdds,
-              languages: --prevAdds.languages,
-            }
-          })
-        }
-        break
+          if (style === 'languages') {
+            setAdds((prevAdds) => {
+              return {
+                ...prevAdds,
+                languages: --prevAdds.languages,
+              }
+            })
+          }
+          break
 
-      default:
-        break
+        default:
+          break
+      }
+    } else {
+      setTotalPrice((prev) => prev - lastAdd)
+      setLastAdd((prev) => (prev = 0))
     }
   }
 

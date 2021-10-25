@@ -6,6 +6,13 @@ function Panel({ setTotalPrice, isClicked }) {
   const [lastAdd, setLastAdd] = useState(0)
 
   useEffect(() => {
+    const add = adds.pages * adds.languages * 30
+    setTotalPrice((prevPrice) => (prevPrice = prevPrice + add))
+
+    setLastAdd((prev) => (prev = add))
+  }, [adds, setTotalPrice, setLastAdd])
+
+  useEffect(() => {
     setAdds({ pages: 0, languages: 0 })
   }, [isClicked])
 
@@ -17,7 +24,7 @@ function Panel({ setTotalPrice, isClicked }) {
             setAdds((prevAdd) => {
               return {
                 ...prevAdd,
-                pages: parseInt(e.target.value),
+                pages: parseInt(e.target.value), //la logica de aaqui hay q pasarla iogiuaito al otro componente... falta la parte de if e,target, y el if else de aajo
               }
             })
 
@@ -49,6 +56,7 @@ function Panel({ setTotalPrice, isClicked }) {
         setAdds={setAdds}
         setTotalPrice={setTotalPrice}
         setLastAdd={setLastAdd}
+        lastAdd={lastAdd}
       />
     </div>
   )
