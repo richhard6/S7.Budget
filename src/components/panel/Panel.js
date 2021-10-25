@@ -51,12 +51,12 @@ function Panel({ setTotalPrice, isClicked }) {
   return (
     <div>
       <Extra
-        getAdds={getAdds}
         adds={adds}
         setAdds={setAdds}
         setTotalPrice={setTotalPrice}
         setLastAdd={setLastAdd}
         lastAdd={lastAdd}
+        getAdds={getAdds}
       />
     </div>
   )
