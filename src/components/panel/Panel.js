@@ -11,6 +11,7 @@ function Panel({ setTotalPrice, isClicked }) {
 
   const getAdds = (type, e) => {
     const add = adds.pages * adds.languages * 30
+    localStorage.setItem(`budget${adds.languages}`, JSON.stringify(adds))
     if (e.target.value) {
       if (type === 'pages') {
         setAdds((prevAdds) => {
