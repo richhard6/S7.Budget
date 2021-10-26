@@ -9,7 +9,7 @@ function Extra({ adds, setAdds, setTotalPrice, setLastAdd, lastAdd, getAdds }) {
             console.log(prevAdds.pages)
             return {
               ...prevAdds,
-              pages: ++prevAdds.pages,
+              pages: prevAdds.pages + 1,
             }
           })
         }
@@ -18,7 +18,7 @@ function Extra({ adds, setAdds, setTotalPrice, setLastAdd, lastAdd, getAdds }) {
           setAdds((prevAdds) => {
             return {
               ...prevAdds,
-              languages: ++prevAdds.languages,
+              languages: prevAdds.languages + 1,
             }
           })
         }
@@ -30,7 +30,7 @@ function Extra({ adds, setAdds, setTotalPrice, setLastAdd, lastAdd, getAdds }) {
           setAdds((prevAdds) => {
             return {
               ...prevAdds,
-              pages: --prevAdds.pages,
+              pages: prevAdds.pages - 1,
             }
           })
         }
@@ -39,7 +39,7 @@ function Extra({ adds, setAdds, setTotalPrice, setLastAdd, lastAdd, getAdds }) {
           setAdds((prevAdds) => {
             return {
               ...prevAdds,
-              languages: --prevAdds.languages,
+              languages: prevAdds.languages - 1,
             }
           })
         }
