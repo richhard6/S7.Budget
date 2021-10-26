@@ -1,4 +1,6 @@
 import './App.css'
+import { Input, Wrapper } from './components/extra/styles'
+import { Label, HeadingTwo } from './styles'
 import Panel from './components/panel/Panel'
 import { useState } from 'react'
 
@@ -50,10 +52,10 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <p>What you want to do?</p>
-      <label htmlFor="web">Web Page (500e)</label>
-      <input
+    <Wrapper>
+      <HeadingTwo>What you want to do?</HeadingTwo>
+      <Label htmlFor="web">Web Page (500e)</Label>
+      <Input
         type="checkbox"
         name="web"
         onChange={(e) => addToTotal(500, e, 'web')}
@@ -62,21 +64,21 @@ function App() {
       {isClicked.web && (
         <Panel setTotalPrice={setTotalPrice} isClicked={isClicked.web} />
       )}
-      <label htmlFor="seo">SEO consulting (300e)</label>
-      <input
+      <Label htmlFor="seo">SEO consulting (300e)</Label>
+      <Input
         type="checkbox"
         name="seo"
         onChange={(e) => addToTotal(300, e, 'seo')}
       />
-      <label htmlFor="ads"> Google ads campaign (200e)</label>
-      <input
+      <Label htmlFor="ads"> Google ads campaign (200e)</Label>
+      <Input
         type="checkbox"
         name="ads"
         onChange={(e) => addToTotal(200, e, 'ads')}
       />
 
-      <h2>Total:{totalPrice} </h2>
-    </div>
+      <HeadingTwo>Total:{totalPrice} </HeadingTwo>
+    </Wrapper>
   )
 }
 
