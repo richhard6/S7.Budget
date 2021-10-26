@@ -6,6 +6,13 @@ function Extra({ adds, setAdds, setTotalPrice, setLastAdd, lastAdd, getAdds }) {
   useEffect(() => {
     setTotalPrice((prevPrice) => (prevPrice = prevPrice + add))
     setLastAdd((prev) => (prev = add))
+
+    if (adds.languages < 0) {
+      adds.languages = 0
+    }
+    if (adds.pages < 0) {
+      adds.pages = 0
+    }
   }, [add, adds, setTotalPrice, setLastAdd])
 
   //hacer que no baje de 0

@@ -11,6 +11,9 @@ export const Input = styled.input`
   width: 25%;
   padding: 1.5rem;
   text-align: center;
+  & {
+    outline: none;
+  }
 `
 
 export const Button = styled.button`
