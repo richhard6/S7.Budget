@@ -1,12 +1,18 @@
 import { Wrapper, Button, Input, WrapperButton } from './styles'
-
+import { useEffect } from 'react'
 function Extra({ adds, setAdds, setTotalPrice, setLastAdd, lastAdd, getAdds }) {
-  const handleClick = (type, style, e) => {
+  const add = adds.pages * adds.languages * 30
+  useEffect(() => {
+    setTotalPrice((prevPrice) => (prevPrice = prevPrice + add))
+
+    setLastAdd((prev) => (prev = add))
+  }, [add, adds, setTotalPrice, setLastAdd])
+
+  const handleClick = (type, style) => {
     switch (type) {
       case 'add':
         if (style === 'pages') {
           setAdds((prevAdds) => {
-            console.log(prevAdds.pages)
             return {
               ...prevAdds,
               pages: prevAdds.pages + 1,
@@ -33,6 +39,8 @@ function Extra({ adds, setAdds, setTotalPrice, setLastAdd, lastAdd, getAdds }) {
               pages: prevAdds.pages - 1,
             }
           })
+
+          setTotalPrice((prevPrice) => (prevPrice = prevPrice - add))
         }
 
         if (style === 'languages') {
@@ -42,6 +50,7 @@ function Extra({ adds, setAdds, setTotalPrice, setLastAdd, lastAdd, getAdds }) {
               languages: prevAdds.languages - 1,
             }
           })
+          setTotalPrice((prevPrice) => (prevPrice = prevPrice - add))
         }
         break
 
@@ -49,8 +58,6 @@ function Extra({ adds, setAdds, setTotalPrice, setLastAdd, lastAdd, getAdds }) {
         break
     }
   }
-
-  // onChange={(e) => handleClick('add', 'languages', e)}
 
   return (
     <Wrapper>

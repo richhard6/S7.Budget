@@ -6,13 +6,6 @@ function Panel({ setTotalPrice, isClicked }) {
   const [lastAdd, setLastAdd] = useState(0)
 
   useEffect(() => {
-    const add = adds.pages * adds.languages * 30
-    setTotalPrice((prevPrice) => (prevPrice = prevPrice + add))
-
-    setLastAdd((prev) => (prev = add))
-  }, [adds, setTotalPrice, setLastAdd])
-
-  useEffect(() => {
     setAdds({ pages: 0, languages: 0 })
   }, [isClicked])
 
