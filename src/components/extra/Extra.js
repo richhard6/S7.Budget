@@ -1,7 +1,6 @@
 import { Wrapper, Button, Input, WrapperButton } from './styles'
 
 function Extra({ adds, setAdds, setTotalPrice, setLastAdd, lastAdd, getAdds }) {
-  //getAdds
   const handleClick = (type, style, e) => {
     switch (type) {
       case 'add':
@@ -10,7 +9,7 @@ function Extra({ adds, setAdds, setTotalPrice, setLastAdd, lastAdd, getAdds }) {
             console.log(prevAdds.pages)
             return {
               ...prevAdds,
-              pages: ++prevAdds.pages, //here's the bug
+              pages: ++prevAdds.pages,
             }
           })
         }

@@ -18,33 +18,23 @@ function Panel({ setTotalPrice, isClicked }) {
 
   const getAdds = (type, e) => {
     if (e.target.value) {
-      switch (type) {
-        case 'pages':
-          if (e.target.value.length > 0)
-            setAdds((prevAdd) => {
-              return {
-                ...prevAdd,
-                pages: parseInt(e.target.value), //la logica de aaqui hay q pasarla iogiuaito al otro componente... falta la parte de if e,target, y el if else de aajo
-              }
-            })
-
-          break
-        case 'languages':
-          if (e.target.value.length > 0)
-            setAdds((prevAdd) => {
-              return {
-                ...prevAdd,
-                languages: parseInt(e.target.value),
-              }
-            })
-          break
-
-        default:
-          break
+      if (type === 'pages') {
+        setAdds((prevAdds) => {
+          return {
+            ...prevAdds,
+            pages: e.target.value,
+          }
+        })
       }
-    } else {
-      setTotalPrice((prev) => prev - lastAdd)
-      setLastAdd((prev) => (prev = 0))
+
+      if (type === 'languages') {
+        setAdds((prevAdds) => {
+          return {
+            ...prevAdds,
+            languages: e.target.value,
+          }
+        })
+      }
     }
   }
 
