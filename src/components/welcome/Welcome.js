@@ -1,12 +1,16 @@
-import { Start, Title } from './styles'
+import { Start, Title, Wrapper } from './styles'
+
+import { Link } from 'react-router-dom'
 
 function Welcome() {
   return (
-    <>
+    <Wrapper>
       <Title>Welcome to CreateYourBudget</Title>
 
-      <Start>START</Start>
-    </>
+      <Link to="/budget">
+        <Start>START</Start>
+      </Link>
+    </Wrapper>
   )
 }
 

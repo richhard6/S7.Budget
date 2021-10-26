@@ -22,6 +22,7 @@ export const Button = styled.button`
   font-size: 2.5rem;
   border: none;
   background-color: orange;
+  border-radius: 7px;
 `
 
 export const WrapperButton = styled.div`
