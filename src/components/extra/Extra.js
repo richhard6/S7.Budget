@@ -1,13 +1,14 @@
 import { Wrapper, Button, Input, WrapperButton } from './styles'
 import { useEffect } from 'react'
+
 function Extra({ adds, setAdds, setTotalPrice, setLastAdd, lastAdd, getAdds }) {
   const add = adds.pages * adds.languages * 30
   useEffect(() => {
     setTotalPrice((prevPrice) => (prevPrice = prevPrice + add))
-
     setLastAdd((prev) => (prev = add))
   }, [add, adds, setTotalPrice, setLastAdd])
 
+  //hacer que no baje de 0
   const handleClick = (type, style) => {
     switch (type) {
       case 'add':
@@ -19,7 +20,6 @@ function Extra({ adds, setAdds, setTotalPrice, setLastAdd, lastAdd, getAdds }) {
             }
           })
         }
-
         if (style === 'languages') {
           setAdds((prevAdds) => {
             return {
@@ -28,7 +28,6 @@ function Extra({ adds, setAdds, setTotalPrice, setLastAdd, lastAdd, getAdds }) {
             }
           })
         }
-
         break
 
       case 'substract':
@@ -39,10 +38,8 @@ function Extra({ adds, setAdds, setTotalPrice, setLastAdd, lastAdd, getAdds }) {
               pages: prevAdds.pages - 1,
             }
           })
-
           setTotalPrice((prevPrice) => (prevPrice = prevPrice - add))
         }
-
         if (style === 'languages') {
           setAdds((prevAdds) => {
             return {

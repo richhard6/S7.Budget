@@ -10,6 +10,7 @@ function Panel({ setTotalPrice, isClicked }) {
   }, [isClicked])
 
   const getAdds = (type, e) => {
+    const add = adds.pages * adds.languages * 30
     if (e.target.value) {
       if (type === 'pages') {
         setAdds((prevAdds) => {
@@ -28,11 +29,16 @@ function Panel({ setTotalPrice, isClicked }) {
           }
         })
       }
+      if (lastAdd < add) {
+        setTotalPrice((prevPrice) => (prevPrice = prevPrice + add))
+      } else {
+        setTotalPrice((prevPrice) => (prevPrice = prevPrice - add))
+      }
     }
   }
 
   return (
-    <div>
+    <>
       <Extra
         adds={adds}
         setAdds={setAdds}
@@ -41,7 +47,7 @@ function Panel({ setTotalPrice, isClicked }) {
         lastAdd={lastAdd}
         getAdds={getAdds}
       />
-    </div>
+    </>
   )
 }
 
