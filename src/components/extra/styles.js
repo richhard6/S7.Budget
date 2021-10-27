@@ -32,3 +32,7 @@ export const WrapperButton = styled.div`
   justify-content: space-around;
   align-items: center;
 `
+
+export const Label = styled.label`
+  font-weight: 300;
+`
