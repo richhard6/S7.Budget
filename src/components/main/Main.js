@@ -1,6 +1,7 @@
 import { Input, Wrapper } from '../extra/styles'
 import { Label, HeadingTwo } from '../../styles'
 import Panel from '../panel/Panel'
+import BudgetList from '../budgetList/BudgetList'
 import { useState, useEffect } from 'react'
 
 function Main() {
@@ -95,6 +96,7 @@ function Main() {
 
   return (
     <Wrapper>
+      <BudgetList />
       <Label htmlFor="name">Name</Label>
       <Input
         type="text"

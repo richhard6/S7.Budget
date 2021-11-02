@@ -16,10 +16,7 @@ function Extra({ adds, setAdds, setTotalPrice, setLastAdd, getAdds }) {
     }
   }, [add, adds, setTotalPrice, setLastAdd])
 
-  //hacer que no baje de 0
   const handleClick = (type, style) => {
-    localStorage.setItem(`budget`, JSON.stringify(adds))
-
     switch (type) {
       case 'add':
         if (style === 'pages') {
