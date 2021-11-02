@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import Extra from '../extra/Extra'
 
-function Panel({ setTotalPrice, isClicked }) {
+function Panel({ setTotalPrice, isClicked, setBudget, budget }) {
   const [adds, setAdds] = useState({ pages: 0, languages: 0 })
   const [lastAdd, setLastAdd] = useState(0)
 
@@ -11,9 +11,19 @@ function Panel({ setTotalPrice, isClicked }) {
     setAdds({ pages: 0, languages: 0 })
   }, [isClicked])
 
+  useEffect(() => {
+    setBudget((prevBudget) => {
+      return {
+        ...prevBudget,
+        extras: { ...adds },
+      }
+    })
+  }, [adds, setBudget])
+
   const getAdds = (type, e) => {
     const add = adds.pages * adds.languages * 30
-    localStorage.setItem(`budget${adds.languages}`, JSON.stringify(adds))
+
+    localStorage.setItem(budget.budgetName, JSON.stringify(budget))
     if (e.target.value) {
       if (type === 'pages') {
         setAdds((prevAdds) => {

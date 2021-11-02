@@ -17,6 +17,7 @@ function Main() {
     budgetName: '',
     isClicked,
     totalPrice,
+    extras: {},
   })
 
   useEffect(() => {
@@ -116,7 +117,12 @@ function Main() {
       />
 
       {isClicked.web && (
-        <Panel setTotalPrice={setTotalPrice} isClicked={isClicked.web} />
+        <Panel
+          setTotalPrice={setTotalPrice}
+          isClicked={isClicked.web}
+          setBudget={setBudget}
+          budget={budget}
+        />
       )}
       <Label htmlFor="seo">SEO consulting (300e)</Label>
       <Input
