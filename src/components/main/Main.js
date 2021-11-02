@@ -1,7 +1,7 @@
 import { Input, Wrapper } from '../extra/styles'
 import { Label, HeadingTwo } from '../../styles'
 import Panel from '../panel/Panel'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 function Main() {
   const [totalPrice, setTotalPrice] = useState(0)
@@ -12,12 +12,53 @@ function Main() {
     ads: false,
   })
 
+  const [budget, setBudget] = useState({
+    username: '',
+    budgetName: '',
+    isClicked,
+    totalPrice,
+  })
+
+  useEffect(() => {
+    setBudget((prevBudget) => {
+      return {
+        ...prevBudget,
+        isClicked: isClicked,
+      }
+    })
+  }, [isClicked])
+
+  const handleChange = (e, type) => {
+    if (type === 'username') {
+      setBudget((prevBudget) => {
+        return {
+          ...prevBudget,
+          username: e.target.value,
+        }
+      })
+    } else {
+      setBudget((prevBudget) => {
+        return {
+          ...prevBudget,
+          budgetName: e.target.value,
+        }
+      })
+    }
+  }
+
   const addToTotal = (amount, e, type) => {
     if (e.target.checked) {
       setTotalPrice((prev) => prev + amount)
     } else {
       setTotalPrice((prev) => prev - amount)
     }
+
+    setBudget((prevBudget) => {
+      return {
+        ...prevBudget,
+        totalPrice: totalPrice,
+      }
+    })
 
     switch (type) {
       case 'web':
@@ -52,6 +93,20 @@ function Main() {
 
   return (
     <Wrapper>
+      <Label htmlFor="name">Name</Label>
+      <Input
+        type="text"
+        name="name"
+        placeholder="your name"
+        onChange={(e) => handleChange(e, 'username')}
+      />
+      <Label htmlFor="budget">Budget Name</Label>
+      <Input
+        type="text"
+        name="budget"
+        placeholder="e.g. Webpage + seo"
+        onChange={(e) => handleChange(e, 'budgetName')}
+      />
       <HeadingTwo>What you want to do?</HeadingTwo>
       <Label htmlFor="web">Web Page (500e)</Label>
       <Input
