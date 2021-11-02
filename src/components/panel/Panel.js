@@ -5,8 +5,6 @@ function Panel({ setTotalPrice, isClicked, setBudget, budget }) {
   const [adds, setAdds] = useState({ pages: 0, languages: 0 })
   const [lastAdd, setLastAdd] = useState(0)
 
-  //en el localStorage hay que guardar el precio total, comn lo que estaba marcado y la cantidad de pages y languages que habia antes
-
   useEffect(() => {
     setAdds({ pages: 0, languages: 0 })
   }, [isClicked])
@@ -18,12 +16,13 @@ function Panel({ setTotalPrice, isClicked, setBudget, budget }) {
         extras: { ...adds },
       }
     })
-  }, [adds, setBudget])
+
+    localStorage.setItem(budget.budgetName, JSON.stringify(budget))
+  }, [adds, setBudget]) //hay que haxer que cada vez que haya una modificacion en el state budget: actualice lo q esta guardado en el local, puesto que solo esta actualizando cuando le damos clcik en la OPCION DE WEBPAGE
 
   const getAdds = (type, e) => {
     const add = adds.pages * adds.languages * 30
 
-    localStorage.setItem(budget.budgetName, JSON.stringify(budget))
     if (e.target.value) {
       if (type === 'pages') {
         setAdds((prevAdds) => {

@@ -55,6 +55,7 @@ function Main() {
     }
 
     setBudget((prevBudget) => {
+      //no se esta guardadno el totalp
       return {
         ...prevBudget,
         totalPrice: totalPrice,
