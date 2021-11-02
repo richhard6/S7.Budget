@@ -18,7 +18,7 @@ function Panel({ setTotalPrice, isClicked, setBudget, budget }) {
     })
 
     localStorage.setItem(budget.budgetName, JSON.stringify(budget))
-  }, [adds, setBudget]) //hay que haxer que cada vez que haya una modificacion en el state budget: actualice lo q esta guardado en el local, puesto que solo esta actualizando cuando le damos clcik en la OPCION DE WEBPAGE
+  }, [adds, setBudget]) //hay que haxer que cada vez que haya una modificacion en el state budget: actualice lo q esta guardado en el local, puesto que solo esta actualizando cuando le damos clcik en la OPCION D WEBPAGE
 
   const getAdds = (type, e) => {
     const add = adds.pages * adds.languages * 30
