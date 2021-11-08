@@ -12,7 +12,7 @@ function BudgetList({ budget }) {
 
   const [allBudgets, setAllBudgets] = useState([])
 
-  function allStorage() {
+  const allStorage = () => {
     var values = [],
       keys = Object.keys(localStorage),
       i = keys.length

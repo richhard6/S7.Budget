@@ -19,6 +19,7 @@ function Main() {
     isClicked,
     totalPrice,
     extras: {},
+    createdAt: Date.now(),
   })
 
   useEffect(() => {
