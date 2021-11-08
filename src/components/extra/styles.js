@@ -23,6 +23,7 @@ export const Button = styled.button`
   border: none;
   background-color: orange;
   border-radius: 7px;
+  margin-top: 1rem;
 `
 
 export const WrapperButton = styled.div`

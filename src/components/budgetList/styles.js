@@ -15,3 +15,5 @@ export const TableWrapper = styled.tr`
   align-items: center;
   width: 150%;
 `
+
+export const TableBody = styled.tbody``

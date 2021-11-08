@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { Button } from '../extra/styles'
 
 import Modal from '../modal/Modal'
 
@@ -28,9 +29,13 @@ function Info({ text }) {
     }
   }, [showModal])
 
+  //se podria hacer otro bototn diferente para la i de info
+
+  //faltan styled para ese div ref y para la P
+
   return (
     <div ref={ref}>
-      <button onClick={handleClick}>i</button>
+      <Button onClick={handleClick}>i</Button>
       {showModal && (
         <Modal onClose={handleClose}>
           <p>{text}</p>

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import Extra from '../extra/Extra'
+import { Button } from '../extra/styles'
 
 function Panel({ setTotalPrice, isClicked, setBudget, budget }) {
   const [adds, setAdds] = useState({ pages: 0, languages: 0 })
@@ -17,10 +18,10 @@ function Panel({ setTotalPrice, isClicked, setBudget, budget }) {
       }
     })
   }, [adds, setBudget]) //hay que haxer que cada vez que haya una modificacion en el state budget: actualice lo q esta guardado en el local, puesto que solo esta actualizando cuando le damos clcik en la OPCION D WEBPAGE
+  //EL SAVE NO PUEDE ESTAR AQUI; TIENE QUE APARECER TANTO COMO SI LE DOY AA WEB O NO.
 
   const getAdds = (type, e) => {
     const add = adds.pages * adds.languages * 30
-
     if (e.target.value) {
       if (type === 'pages') {
         setAdds((prevAdds) => {
@@ -30,7 +31,6 @@ function Panel({ setTotalPrice, isClicked, setBudget, budget }) {
           }
         })
       }
-
       if (type === 'languages') {
         setAdds((prevAdds) => {
           return {
@@ -59,13 +59,13 @@ function Panel({ setTotalPrice, isClicked, setBudget, budget }) {
         budget={budget}
       />
 
-      <button
+      <Button
         onClick={() =>
           localStorage.setItem(budget.budgetName, JSON.stringify(budget))
         }
       >
-        SAVEEEEEE
-      </button>
+        SAVE
+      </Button>
     </>
   )
 }
