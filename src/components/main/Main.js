@@ -30,6 +30,15 @@ function Main() {
     })
   }, [isClicked])
 
+  useEffect(() => {
+    setBudget((prevBudget) => {
+      return {
+        ...prevBudget,
+        totalPrice,
+      }
+    })
+  }, [totalPrice])
+
   const handleChange = (e, type) => {
     if (type === 'username') {
       setBudget((prevBudget) => {
@@ -96,7 +105,7 @@ function Main() {
 
   return (
     <Wrapper>
-      <BudgetList />
+      <BudgetList budget={budget} />
       <Label htmlFor="name">Name</Label>
       <Input
         type="text"

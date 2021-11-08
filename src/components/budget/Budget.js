@@ -1,9 +1,8 @@
 function Budget({ budget }) {
   return (
     <div>
-      <p>
-        {budget.budgetName} {budget.totalPrice}
-      </p>
+      <td> {budget.budgetName}</td>
+      <td> {budget.totalPrice}</td>
     </div>
   )
 }

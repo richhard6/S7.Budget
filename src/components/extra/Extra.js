@@ -2,7 +2,7 @@ import { Wrapper, Button, Input, WrapperButton, Label } from './styles'
 import { useEffect } from 'react'
 import Info from '../info/Info'
 
-function Extra({ adds, setAdds, setTotalPrice, setLastAdd, getAdds }) {
+function Extra({ adds, setAdds, setTotalPrice, setLastAdd, getAdds, budget }) {
   const add = adds.pages * adds.languages * 30
   useEffect(() => {
     setTotalPrice((prevPrice) => (prevPrice = prevPrice + add))

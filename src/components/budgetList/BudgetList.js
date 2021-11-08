@@ -1,6 +1,9 @@
 import Budget from '../budget/Budget'
+import { useEffect, useState } from 'react'
 
-function BudgetList() {
+function BudgetList({ budget }) {
+  const [allBudgets, setAllBudgets] = useState([])
+
   function allStorage() {
     var values = [],
       keys = Object.keys(localStorage),
@@ -10,13 +13,12 @@ function BudgetList() {
       values.push(localStorage.getItem(keys[i]))
     }
 
-    if (values) {
-      JSON.parse(values)
-      return values
-    } else {
-      return null
-    }
+    setAllBudgets((prevBudgets) => (prevBudgets = values))
   }
+
+  useEffect(() => {
+    allStorage()
+  }, [budget])
 
   //aqui recogeremos del local storage todos los presupuestos previamente guardados(recordar que hay unbug en el precio.)
   //guardado en LocalStorage.  entonces se ordenan alfabeticamente y  por fecha de creacion y reiniciar el orden
@@ -25,9 +27,15 @@ function BudgetList() {
 
   return (
     <div>
-      {allStorage().map((budget) => {
-        return <Budget budget={budget} />
-      })}
+      <table>
+        <tr>
+          <th>Budget Name</th>
+          <th>Budget Total</th>
+        </tr>
+        {allBudgets.map((budget) => {
+          return <Budget budget={JSON.parse(budget)} update={allStorage} />
+        })}
+      </table>
     </div>
   )
 }

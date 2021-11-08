@@ -16,8 +16,6 @@ function Panel({ setTotalPrice, isClicked, setBudget, budget }) {
         extras: { ...adds },
       }
     })
-
-    localStorage.setItem(budget.budgetName, JSON.stringify(budget))
   }, [adds, setBudget]) //hay que haxer que cada vez que haya una modificacion en el state budget: actualice lo q esta guardado en el local, puesto que solo esta actualizando cuando le damos clcik en la OPCION D WEBPAGE
 
   const getAdds = (type, e) => {
@@ -58,7 +56,16 @@ function Panel({ setTotalPrice, isClicked, setBudget, budget }) {
         setLastAdd={setLastAdd}
         lastAdd={lastAdd}
         getAdds={getAdds}
+        budget={budget}
       />
+
+      <button
+        onClick={() =>
+          localStorage.setItem(budget.budgetName, JSON.stringify(budget))
+        }
+      >
+        SAVEEEEEE
+      </button>
     </>
   )
 }
