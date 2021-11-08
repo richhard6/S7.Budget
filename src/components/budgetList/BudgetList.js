@@ -30,13 +30,21 @@ function BudgetList({ budget }) {
 
   return (
     <Table>
-      <TableRow>
-        <TableHeading>Budget Name</TableHeading>
-        <TableHeading>Budget Total</TableHeading>
-      </TableRow>
-      {allBudgets.map((budget) => {
-        return <Budget budget={JSON.parse(budget)} update={allStorage} />
-      })}
+      <tbody>
+        <TableRow>
+          <TableHeading>Budget Name</TableHeading>
+          <TableHeading>Budget Total</TableHeading>
+        </TableRow>
+        {allBudgets.map((budget, index) => {
+          return (
+            <Budget
+              key={index}
+              budget={JSON.parse(budget)}
+              update={allStorage}
+            />
+          )
+        })}
+      </tbody>
     </Table>
   )
 }
