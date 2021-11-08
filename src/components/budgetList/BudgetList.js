@@ -1,7 +1,15 @@
 import Budget from '../budget/Budget'
 import { useEffect, useState } from 'react'
 
+import { Table, TableHeading, TableRow } from './styles'
+
 function BudgetList({ budget }) {
+  //Hay que crear enn este componente un botton para organizarlo
+  //alfabeticamente y por fecha de creacion(need crear property de createdAt.)
+  //un buton para poder reinciar el orden,
+  //componente separado para search bar, que mostrara solo entonces
+  //el nombre de budget que coincida con el user  input
+
   const [allBudgets, setAllBudgets] = useState([])
 
   function allStorage() {
@@ -20,23 +28,16 @@ function BudgetList({ budget }) {
     allStorage()
   }, [budget])
 
-  //aqui recogeremos del local storage todos los presupuestos previamente guardados(recordar que hay unbug en el precio.)
-  //guardado en LocalStorage.  entonces se ordenan alfabeticamente y  por fecha de creacion y reiniciar el orden
-  //el state de Budget debe tener ahora un TIEMPO de creacion......... Y creare un boton para guardar en localStorage, asi no se guarda con cada Onchjange
-  //cross Origin pproblem.. probablemente xq no esta formateado bien el JSON....
-
   return (
-    <div>
-      <table>
-        <tr>
-          <th>Budget Name</th>
-          <th>Budget Total</th>
-        </tr>
-        {allBudgets.map((budget) => {
-          return <Budget budget={JSON.parse(budget)} update={allStorage} />
-        })}
-      </table>
-    </div>
+    <Table>
+      <TableRow>
+        <TableHeading>Budget Name</TableHeading>
+        <TableHeading>Budget Total</TableHeading>
+      </TableRow>
+      {allBudgets.map((budget) => {
+        return <Budget budget={JSON.parse(budget)} update={allStorage} />
+      })}
+    </Table>
   )
 }
 

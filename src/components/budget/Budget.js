@@ -1,9 +1,11 @@
+import { TableData, TableWrapper } from '../budgetList/styles'
+
 function Budget({ budget }) {
   return (
-    <div>
-      <td> {budget.budgetName}</td>
-      <td> {budget.totalPrice}</td>
-    </div>
+    <TableWrapper>
+      <TableData> {budget.budgetName}</TableData>
+      <TableData> {budget.totalPrice}eu</TableData>
+    </TableWrapper>
   )
 }
 
