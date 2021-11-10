@@ -58,14 +58,6 @@ function Panel({ setTotalPrice, isClicked, setBudget, budget }) {
         getAdds={getAdds}
         budget={budget}
       />
-
-      <Button
-        onClick={() =>
-          localStorage.setItem(budget.budgetName, JSON.stringify(budget))
-        }
-      >
-        SAVE
-      </Button>
     </>
   )
 }

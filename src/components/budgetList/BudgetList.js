@@ -1,22 +1,29 @@
 import Budget from '../budget/Budget'
-import { useEffect, useState, useMemo } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Table, TableBody, TableHeading, TableRow } from './styles'
 import { Button, WrapperButton } from '../extra/styles'
 
 function BudgetList({ budget }) {
-  //componente separado para search bar, que mostrara solo entonces
-  //el nombre de budget que coincida con el user  input
-
   const [allBudgets, setAllBudgets] = useState([])
 
+  const [nextBudgets, setNextBudgets] = useState([])
+
   useEffect(() => {
-    allStorage()
-    // aqui uando le damos a SAVE no se esta actualizaxndo la lista de budgets
-  }, [budget])
+    const storage = allStorage()
+
+    const ola = storage.map((budget) => JSON.parse(budget))
+
+    setNextBudgets((prevBudgets) => [...prevBudgets, ...ola])
+  }, [])
+
+  //nextBudgets esta cambiando y no actualiza el useEffect .. ... -.-
+  useEffect(() => {
+    setAllBudgets((prevBudgets) => [...prevBudgets, ...nextBudgets])
+  }, [nextBudgets])
 
   const allStorage = () => {
-    var values = [],
+    let values = [],
       keys = Object.keys(localStorage),
       i = keys.length
 
@@ -24,8 +31,20 @@ function BudgetList({ budget }) {
       values.push(localStorage.getItem(keys[i]))
     }
 
-    setAllBudgets((prevBudgets) => (prevBudgets = values))
+    return values
   }
+
+  /*   const alphaSort = () => {
+    allBudgets
+      .sort((a, b) => {
+        return a.budgetName < b.budgetName ? 1 : -1
+      })
+      .map((sorted) => setAllBudgets(sorted))
+  } */
+
+  const dateSort = () => {}
+
+  const restartSort = () => {}
 
   //crear que budgetList se muestre condicionalmente solo si hay budgets en el local... eso se haria en el componente padre
 
@@ -48,15 +67,18 @@ function BudgetList({ budget }) {
 
           {allBudgets.map((budget, index) => {
             return (
-              <Budget
-                key={index}
-                budget={JSON.parse(budget)}
-                allStorage={allStorage}
-              />
+              <Budget key={index} budget={budget} allStorage={allStorage} />
             )
           })}
         </TableBody>
       </Table>
+      <Button
+        onClick={() =>
+          localStorage.setItem(budget.budgetName, JSON.stringify(budget))
+        }
+      >
+        SAVE
+      </Button>
     </>
   )
 }
