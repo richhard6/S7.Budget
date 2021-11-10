@@ -7,20 +7,13 @@ import { Button, WrapperButton } from '../extra/styles'
 function BudgetList({ budget }) {
   const [allBudgets, setAllBudgets] = useState([])
 
-  const [nextBudgets, setNextBudgets] = useState([])
-
   useEffect(() => {
     const storage = allStorage()
 
-    const ola = storage.map((budget) => JSON.parse(budget))
+    const parsedStorage = storage.map((budget) => JSON.parse(budget))
 
-    setNextBudgets((prevBudgets) => [...prevBudgets, ...ola])
-  }, [])
-
-  //nextBudgets esta cambiando y no actualiza el useEffect .. ... -.-
-  useEffect(() => {
-    setAllBudgets((prevBudgets) => [...prevBudgets, ...nextBudgets])
-  }, [nextBudgets])
+    setAllBudgets((prevBudgets) => [...prevBudgets, ...parsedStorage])
+  }, [setAllBudgets])
 
   const allStorage = () => {
     let values = [],
@@ -34,28 +27,37 @@ function BudgetList({ budget }) {
     return values
   }
 
-  /*   const alphaSort = () => {
-    allBudgets
-      .sort((a, b) => {
-        return a.budgetName < b.budgetName ? 1 : -1
-      })
-      .map((sorted) => setAllBudgets(sorted))
-  } */
+  const alphaSort = () => {
+    let alphaOrdered = allBudgets
+      .map((budget) => budget)
+      .sort((a, b) => (a.budgetName > b.budgetName ? 1 : -1))
 
-  const dateSort = () => {}
+    setAllBudgets((prevBudgets) => (prevBudgets = alphaOrdered))
+  }
 
-  const restartSort = () => {}
+  const dateSort = () => {
+    let dateOrdered = allBudgets
+      .map((budget) => budget)
+      .sort((a, b) => (a.createdAt > b.createdAt ? 1 : -1))
 
-  //crear que budgetList se muestre condicionalmente solo si hay budgets en el local... eso se haria en el componente padre
+    setAllBudgets((prevBudgets) => (prevBudgets = dateOrdered))
+  }
 
-  //depende del budget que se estd creando, antes de darle a save, la URL debe cambiar y mostrar los modificadores correspondientes.
+  const restartSort = () => {
+    const storage = allStorage()
+
+    const parsedStorage = storage.map((budget) => JSON.parse(budget))
+
+    setAllBudgets((prevBudgets) => (prevBudgets = parsedStorage))
+  }
+
   return (
     <>
       <WrapperButton>
         s0rt
-        <Button>alfabetica</Button>
-        <Button>createdAt</Button>
-        <Button>reiniciar orden</Button>
+        <Button onClick={alphaSort}>alfabetica</Button>
+        <Button onClick={dateSort}>createdAt</Button>
+        <Button onClick={restartSort}>reiniciar orden</Button>
       </WrapperButton>
 
       <Table>
