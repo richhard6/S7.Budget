@@ -1,5 +1,6 @@
 import Budget from '../budget/Budget'
 import { useEffect, useState } from 'react'
+import Search from '../search/Search'
 
 import { Table, TableBody, TableHeading, TableRow } from './styles'
 import { Button, WrapperButton } from '../extra/styles'
@@ -14,6 +15,22 @@ function BudgetList({ budget }) {
 
     setAllBudgets((prevBudgets) => [...prevBudgets, ...parsedStorage])
   }, [setAllBudgets])
+
+  const filterByWord = (letters) => {
+    let wordFiltered = allBudgets.filter((budget) =>
+      budget.budgetName.includes(letters)
+    )
+    if (letters.length > 2)
+      setAllBudgets((prevBudgets) => (prevBudgets = wordFiltered))
+
+    if (letters.length < 2) {
+      const storage = allStorage()
+
+      const parsedStorage = storage.map((budget) => JSON.parse(budget))
+
+      setAllBudgets((prevBudgets) => (prevBudgets = parsedStorage))
+    }
+  }
 
   const allStorage = () => {
     let values = [],
@@ -59,7 +76,7 @@ function BudgetList({ budget }) {
         <Button onClick={dateSort}>createdAt</Button>
         <Button onClick={restartSort}>reiniciar orden</Button>
       </WrapperButton>
-
+      <Search filterByWord={filterByWord} />
       <Table>
         <TableBody>
           <TableRow>
