@@ -4,11 +4,9 @@ import React from 'react'
 import Panel from '../panel/Panel'
 import BudgetList from '../budgetList/BudgetList'
 import { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
 
 function Main() {
   const [totalPrice, setTotalPrice] = useState(0)
-  let history = useHistory()
 
   const [isClicked, setIsClicked] = useState({
     web: false,

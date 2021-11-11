@@ -75,7 +75,7 @@ function Extra({ adds, setAdds, setTotalPrice, setLastAdd, getAdds, budget }) {
       <WrapperButton>
         <Button onClick={() => handleClick('substract', 'pages')}>-</Button>
         <Button onClick={() => handleClick('add', 'pages')}>+</Button>
-        <Info text="here you can add the pages" />
+        <Info text="Here you can add the pages" />
       </WrapperButton>
       <Label htmlFor="languages">Languages</Label>
 
@@ -88,7 +88,7 @@ function Extra({ adds, setAdds, setTotalPrice, setLastAdd, getAdds, budget }) {
       <WrapperButton>
         <Button onClick={() => handleClick('substract', 'languages')}>-</Button>
         <Button onClick={() => handleClick('add', 'languages')}>+</Button>
-        <Info text="here you can add the languages" />
+        <Info text="Here you can add the languages" />
       </WrapperButton>
     </Wrapper>
   )

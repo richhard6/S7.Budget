@@ -26,8 +26,7 @@ function Panel({ setTotalPrice, isClicked, setBudget, budget }) {
         extras: { ...adds },
       }
     })
-  }, [adds, setBudget]) //hay que haxer que cada vez que haya una modificacion en el state budget: actualice lo q esta guardado en el local, puesto que solo esta actualizando cuando le damos clcik en la OPCION D WEBPAGE
-  //EL SAVE NO PUEDE ESTAR AQUI; TIENE QUE APARECER TANTO COMO SI LE DOY AA WEB O NO.
+  }, [adds, setBudget])
 
   const getAdds = (type, e) => {
     const add = adds.pages * adds.languages * 30

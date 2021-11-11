@@ -13,9 +13,9 @@ export const ModalBody = styled.div`
 
 export const ModalContent = styled.div`
   background: white;
-  width: 300px;
+  width: 400px;
   padding: 10px 20px;
-  height: 10vh;
+  height: 20vh;
   margin: 10vh auto;
   position: relative;
   opacity: 0.5;

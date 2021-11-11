@@ -4,9 +4,12 @@ import Search from '../search/Search'
 
 import { Table, TableBody, TableHeading, TableRow } from './styles'
 import { Button, WrapperButton } from '../extra/styles'
+import { HeadingTwo } from '../../styles'
 
 function BudgetList({ budget }) {
   const [allBudgets, setAllBudgets] = useState([])
+
+  //el problema esta aqi, no se actualiza la lista de budgets cuando le damos SAVE
 
   useEffect(() => {
     const storage = allStorage()
@@ -15,6 +18,16 @@ function BudgetList({ budget }) {
 
     setAllBudgets((prevBudgets) => [...prevBudgets, ...parsedStorage])
   }, [setAllBudgets])
+
+  const handleClick = () => {
+    localStorage.setItem(budget.budgetName, JSON.stringify(budget))
+
+    const storage = allStorage()
+
+    const parsedStorage = storage.map((budget) => JSON.parse(budget))
+
+    setAllBudgets((prevBudgets) => (prevBudgets = parsedStorage))
+  }
 
   const filterByWord = (letters) => {
     let wordFiltered = allBudgets.filter((budget) =>
@@ -71,10 +84,16 @@ function BudgetList({ budget }) {
   return (
     <>
       <WrapperButton>
-        s0rt
-        <Button onClick={alphaSort}>alfabetica</Button>
-        <Button onClick={dateSort}>createdAt</Button>
-        <Button onClick={restartSort}>reiniciar orden</Button>
+        <HeadingTwo>Sort By</HeadingTwo>
+        <Button size="s" onClick={alphaSort}>
+          Alphabetically
+        </Button>
+        <Button size="s" onClick={dateSort}>
+          By date
+        </Button>
+        <Button size="s" onClick={restartSort}>
+          Restart Order
+        </Button>
       </WrapperButton>
       <Search filterByWord={filterByWord} />
       <Table>
@@ -91,13 +110,7 @@ function BudgetList({ budget }) {
           })}
         </TableBody>
       </Table>
-      <Button
-        onClick={() =>
-          localStorage.setItem(budget.budgetName, JSON.stringify(budget))
-        }
-      >
-        SAVE
-      </Button>
+      <Button onClick={handleClick}>SAVE</Button>
     </>
   )
 }

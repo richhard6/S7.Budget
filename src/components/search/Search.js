@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+import { Input } from '../extra/styles'
+
 function Search({ filterByWord }) {
   const [input, setInput] = useState('')
 
@@ -10,8 +12,7 @@ function Search({ filterByWord }) {
 
   return (
     <>
-      <h1>lcoa</h1>
-      <input onChange={(e) => searchByWord(e)} />
+      <Input onChange={(e) => searchByWord(e)} />
     </>
   )
 }

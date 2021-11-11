@@ -14,12 +14,13 @@ export const Input = styled.input`
   & {
     outline: none;
   }
+  margin-top: 1rem;
 `
 
 export const Button = styled.button`
   color: white;
   cursor: pointer;
-  font-size: 2.5rem;
+  font-size: ${(props) => (props.size ? '1rem' : '2.5rem')};
   border: none;
   background-color: orange;
   border-radius: 7px;
