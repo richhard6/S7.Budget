@@ -1,14 +1,23 @@
 import { useState, useEffect } from 'react'
 import Extra from '../extra/Extra'
-import { Button } from '../extra/styles'
+
+import { useHistory } from 'react-router-dom'
 
 function Panel({ setTotalPrice, isClicked, setBudget, budget }) {
   const [adds, setAdds] = useState({ pages: 0, languages: 0 })
   const [lastAdd, setLastAdd] = useState(0)
 
+  let history = useHistory()
+
   useEffect(() => {
     setAdds({ pages: 0, languages: 0 })
-  }, [isClicked])
+  }, [isClicked.web])
+
+  useEffect(() => {
+    history.push(
+      `/budget?web=${isClicked.web}&seo=${isClicked.seo}&ads=${isClicked.ads}&webNum=${adds.pages}&langNum=${adds.languages}`
+    )
+  }, [isClicked, history, adds])
 
   useEffect(() => {
     setBudget((prevBudget) => {
