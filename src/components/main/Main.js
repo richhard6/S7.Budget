@@ -1,11 +1,16 @@
 import { Input, Wrapper } from '../extra/styles'
 import { Label, HeadingTwo } from '../../styles'
+import React from 'react'
 import Panel from '../panel/Panel'
 import BudgetList from '../budgetList/BudgetList'
 import { useState, useEffect } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 
 function Main() {
   const [totalPrice, setTotalPrice] = useState(0)
+  let history = useHistory()
+
+  let location = useLocation()
 
   const [isClicked, setIsClicked] = useState({
     web: false,
@@ -21,6 +26,12 @@ function Main() {
     extras: {},
     createdAt: Date.now(),
   })
+
+  useEffect(() => {
+    history.push(
+      `budget/?web=${isClicked.web}&seo=${isClicked.seo}&ads=${isClicked.ads}&webNum=xd&langNum=xd`
+    )
+  }, [isClicked, history, location.search])
 
   useEffect(() => {
     setBudget((prevBudget) => {
@@ -66,7 +77,6 @@ function Main() {
     }
 
     setBudget((prevBudget) => {
-      //no se esta guardadno el totalp
       return {
         ...prevBudget,
         totalPrice: totalPrice,
@@ -102,6 +112,9 @@ function Main() {
       default:
         break
     }
+    console.log(isClicked)
+
+    console.log(location)
   }
 
   return (

@@ -20,7 +20,7 @@ function BudgetList({ budget }) {
     let wordFiltered = allBudgets.filter((budget) =>
       budget.budgetName.includes(letters)
     )
-    if (letters.length > 2)
+    if (letters.length > 1)
       setAllBudgets((prevBudgets) => (prevBudgets = wordFiltered))
 
     if (letters.length < 2) {

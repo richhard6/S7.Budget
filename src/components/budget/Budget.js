@@ -1,6 +1,6 @@
 import { TableData, TableWrapper } from '../budgetList/styles'
-import { useEffect } from 'react'
-function Budget({ budget, allStorage }) {
+
+function Budget({ budget }) {
   return (
     <TableWrapper>
       <TableData> {budget.budgetName}</TableData>
