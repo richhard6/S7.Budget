@@ -26,12 +26,8 @@ function Main() {
     extras: {},
     createdAt: Date.now(),
   })
-
-  useEffect(() => {
-    history.push(
-      `budget/?web=${isClicked.web}&seo=${isClicked.seo}&ads=${isClicked.ads}&webNum=xd&langNum=xd`
-    )
-  }, [isClicked, history, location.search])
+  /* 
+  useEffect(() => {}, [isClicked, history, location.search]) */
 
   useEffect(() => {
     setBudget((prevBudget) => {
@@ -40,7 +36,11 @@ function Main() {
         isClicked: isClicked,
       }
     })
-  }, [isClicked])
+
+    history.push(
+      `/budget?web=${isClicked.web}&seo=${isClicked.seo}&ads=${isClicked.ads}&webNum=xd&langNum=xd`
+    )
+  }, [isClicked, history])
 
   useEffect(() => {
     setBudget((prevBudget) => {
@@ -112,9 +112,6 @@ function Main() {
       default:
         break
     }
-    console.log(isClicked)
-
-    console.log(location)
   }
 
   return (
