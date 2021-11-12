@@ -9,7 +9,7 @@ import { HeadingTwo } from '../../styles'
 function BudgetList({ budget }) {
   const [allBudgets, setAllBudgets] = useState([])
 
-  //el problema esta aqi, no se actualiza la lista de budgets cuando le damos SAVE
+  
 
   useEffect(() => {
     const storage = allStorage()
@@ -30,6 +30,10 @@ function BudgetList({ budget }) {
   }
 
   const filterByWord = (letters) => {
+
+      const storage = allStorage()
+
+if(storage){
     let wordFiltered = allBudgets.filter((budget) =>
       budget.budgetName.includes(letters)
     )
@@ -37,12 +41,13 @@ function BudgetList({ budget }) {
       setAllBudgets((prevBudgets) => (prevBudgets = wordFiltered))
 
     if (letters.length < 2) {
-      const storage = allStorage()
+
 
       const parsedStorage = storage.map((budget) => JSON.parse(budget))
 
       setAllBudgets((prevBudgets) => (prevBudgets = parsedStorage))
     }
+}
   }
 
   const allStorage = () => {
