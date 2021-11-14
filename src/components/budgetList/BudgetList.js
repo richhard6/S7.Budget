@@ -2,19 +2,20 @@ import Budget from '../budget/Budget'
 import { useEffect, useState } from 'react'
 import Search from '../search/Search'
 
-import { Table, TableBody, TableHeading, TableRow } from './styles'
+import { Table, TableBody, TableData, TableHeading, TableRow } from './styles'
 import { Button, WrapperButton } from '../extra/styles'
 import { HeadingTwo } from '../../styles'
 
 function BudgetList({ budget }) {
   const [allBudgets, setAllBudgets] = useState([])
-
-  
+  const [inmutableBudgets, setInmutableBudgets] = useState([])
 
   useEffect(() => {
     const storage = allStorage()
 
     const parsedStorage = storage.map((budget) => JSON.parse(budget))
+
+    setInmutableBudgets((prevBudgets) => [...prevBudgets, ...parsedStorage])
 
     setAllBudgets((prevBudgets) => [...prevBudgets, ...parsedStorage])
   }, [setAllBudgets])
@@ -27,27 +28,25 @@ function BudgetList({ budget }) {
     const parsedStorage = storage.map((budget) => JSON.parse(budget))
 
     setAllBudgets((prevBudgets) => (prevBudgets = parsedStorage))
+    setInmutableBudgets((prevBudgets) => (prevBudgets = parsedStorage))
   }
 
   const filterByWord = (letters) => {
+    const storage = allStorage()
 
-      const storage = allStorage()
-
-if(storage){
-    let wordFiltered = allBudgets.filter((budget) =>
-      budget.budgetName.includes(letters)
-    )
-    if (letters.length > 1)
-      setAllBudgets((prevBudgets) => (prevBudgets = wordFiltered))
-
-    if (letters.length < 2) {
-
-
+    if (storage) {
+      let wordFiltered = allBudgets.filter((budget) =>
+        budget.budgetName.includes(letters)
+      )
       const parsedStorage = storage.map((budget) => JSON.parse(budget))
 
-      setAllBudgets((prevBudgets) => (prevBudgets = parsedStorage))
+      if (letters.length > 1)
+        setAllBudgets((prevBudgets) => (prevBudgets = wordFiltered))
+
+      if (letters.length < 2) {
+        setAllBudgets((prevBudgets) => (prevBudgets = parsedStorage))
+      }
     }
-}
   }
 
   const allStorage = () => {
@@ -86,6 +85,10 @@ if(storage){
     setAllBudgets((prevBudgets) => (prevBudgets = parsedStorage))
   }
 
+  /*   if (allBudgets.length < 1) return <div>no budgets</div> */
+
+  console.log(allBudgets)
+
   return (
     <>
       <WrapperButton>
@@ -100,14 +103,18 @@ if(storage){
           Restart Order
         </Button>
       </WrapperButton>
-      <Search filterByWord={filterByWord} />
+      <Search filterByWord={filterByWord} inmutableBudgets={inmutableBudgets} />
       <Table>
         <TableBody>
           <TableRow>
             <TableHeading>Budget Name</TableHeading>
             <TableHeading>Budget Total</TableHeading>
           </TableRow>
-
+          {inmutableBudgets.length < 1 && (
+            <TableRow>
+              <TableData>There's no budget added yet</TableData>
+            </TableRow>
+          )}
           {allBudgets.map((budget, index) => {
             return (
               <Budget key={index} budget={budget} allStorage={allStorage} />

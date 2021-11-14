@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { Input } from '../extra/styles'
 
-function Search({ filterByWord }) {
+function Search({ filterByWord, inmutableBudgets }) {
   const [input, setInput] = useState('')
 
   const searchByWord = (e) => {
@@ -12,7 +12,12 @@ function Search({ filterByWord }) {
 
   return (
     <>
-      <Input onChange={(e) => searchByWord(e)} />
+      {inmutableBudgets.length > 1 && (
+        <Input
+          placeholder="search your budget here"
+          onChange={(e) => searchByWord(e)}
+        />
+      )}
     </>
   )
 }
